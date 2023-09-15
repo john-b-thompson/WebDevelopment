@@ -7,4 +7,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'RecipeApp';
+
+  fraction14 = 1/4;
+  fraction110 = '&#8530;';
+
+  toHTML(input: string) 
+   {
+    return new DOMParser().parseFromString(input, "text/html").documentElement.textContent;
+}
+
+  toDecimal(input: string)
+  {
+    return parseFloat(input);
+  }
 }
