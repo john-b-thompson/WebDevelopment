@@ -4,8 +4,8 @@ import { Recipe } from "src/app/Models/recipe";
 export const RecipeListAPI = createActionGroup({
     source: 'Recipe List API',
     events: {
-        'Save Recipe List': props<{recipeList: []}>(),
+        'Save Recipe List': props<{recipeList: Recipe[]}>(),
         'Get Recipe List': emptyProps(),
-        'Set Recipe List': props<{recipeList: []}>()
+        'Set Recipe List': props<{recipeList: Recipe[]}>()
     }
 });

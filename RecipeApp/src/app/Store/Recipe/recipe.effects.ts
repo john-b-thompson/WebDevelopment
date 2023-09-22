@@ -21,12 +21,12 @@ export class RecipeEffects
 
     loadRecipeList$ = createEffect(() => this.actions$.pipe(
         ofType(RecipeListAPI.getRecipeList),
-        exhaustMap(() => {
+        tap(() => {
             let storedRecipeList = localStorage.getItem(this.recipeListKey);
 
             if (storedRecipeList != null || storedRecipeList != undefined)
             {
-                let parsedArray: [] = JSON.parse(storedRecipeList);
+                let parsedArray: Recipe[] = JSON.parse(storedRecipeList);
                 return of(RecipeListAPI.setRecipeList({ recipeList: parsedArray}));
             }
 

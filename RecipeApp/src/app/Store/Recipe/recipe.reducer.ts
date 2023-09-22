@@ -1,12 +1,13 @@
 import { createReducer, on } from "@ngrx/store";
 
 import { RecipeListAPI } from "./recipe.actions";
+import { State } from "src/app/Models/recipeState";
 
-const initState = {
+export const initState: State = {
     loading: true,
     recipeList: [],
     userAccount: {}
-};
+}
 
 export const recipeListReducer = createReducer(
     initState,
