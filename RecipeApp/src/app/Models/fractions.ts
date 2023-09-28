@@ -1,5 +1,6 @@
 export class Fractions
 {
+    // _frac{n}{n}
     // frac stands for Fraction, 
     // the first number after it is the numerator, 
     // the second number is denominator
