@@ -1,65 +1,56 @@
 export class MeasurementType
 {
-    private _teaspoon: string = 'Teaspoon';
-    private _tablespoon: string = 'Tablespoon';
-    private _ounce: string = 'Ounce';
-    private _cup: string = 'Cup';
-    private _pint: string = 'Pint';
-    private _quart: string = 'Quart';
-    private _gallon: string = 'Gallon';
-    private _pound: string = 'Pound';
-
     teaspoon(): string
     {
-        return this._teaspoon;
+        return 'Teaspoon';
     }
 
     tablespoon(): string
     {
-        return this._tablespoon;
+        return 'Tablespoon';
     }
     
     ounce(): string
     {
-        return this._ounce;
+        return 'Ounce';
     }
     
     cup(): string
     {
-        return this._cup;
+        return 'Cup';
     }
     
     pint(): string
     {
-        return this._pint;
+        return 'Pint';
     }
     
     quart(): string
     {
-        return this._quart;
+        return 'Quart';
     }
     
     gallon(): string
     {
-        return this._gallon;
+        return 'Gallon';
     }
     
     pound(): string
     {
-        return this._pound;
+        return 'Pound';
     }
 
     allMeasurementTypes(): string[]
     {
         const mesaruementTypes: string[] = [
-            this._teaspoon,
-            this._tablespoon,
-            this._ounce,
-            this._cup,
-            this._pint,
-            this._quart,
-            this._gallon,
-            this._pound,
+            this.teaspoon(),
+            this.tablespoon(),
+            this.ounce(),
+            this.cup(),
+            this.pint(),
+            this.quart(),
+            this.gallon(),
+            this.pound()
         ];
 
         return mesaruementTypes;
