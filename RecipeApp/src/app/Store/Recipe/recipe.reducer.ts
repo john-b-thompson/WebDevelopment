@@ -16,6 +16,11 @@ export const recipeListReducer = createReducer(
         loading: false,
         recipeList: state.recipeList = action.recipeList
     })),
+    on(RecipeListAPI.saveRecipe, (state, action) => ({
+        ...state,
+        loading: false,
+        recipeList: [...state.recipeList, action.recipe]
+    })),
     on(RecipeListAPI.setRecipeList, (state, action) => ({
         ...state,
         loading: false,

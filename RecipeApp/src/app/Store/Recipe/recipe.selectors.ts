@@ -8,7 +8,3 @@ export const selectRecipeList = createSelector(
     getRecipeList,
     (state) => { return state.recipeList; }
 );
-
-// export const selectRecipeList = (state: {
-//     recipeList: []
-// }) => state.recipeList;
