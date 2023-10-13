@@ -39,6 +39,16 @@ export class MeasurementType
     {
         return 'Pound';
     }
+    
+    gram(): string
+    {
+        return 'Gram';
+    }
+    
+    slice(): string
+    {
+        return 'Slice';
+    }
 
     allMeasurementTypes(): string[]
     {
@@ -50,7 +60,9 @@ export class MeasurementType
             this.pint(),
             this.quart(),
             this.gallon(),
-            this.pound()
+            this.pound(),
+            this.gram(),
+            this.slice()
         ];
 
         return mesaruementTypes;
