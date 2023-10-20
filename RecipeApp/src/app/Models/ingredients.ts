@@ -2,7 +2,7 @@ import { MeasurementType } from "./mesaruementType";
 
 export class Ingredient {
     public Name: string;
-    public Measurement: string;
+    public MeasurementType: string;
     public WholeAmount: string;
     public FractionAmount: string;
 
@@ -10,12 +10,12 @@ export class Ingredient {
                     fractionAmount: string)
     {
         this.Name = name;
-        this.Measurement = measurement;
+        this.MeasurementType = measurement;
         this.WholeAmount = wholeAmount;
         this.FractionAmount = fractionAmount;
     }
 
-    getAmount(): string
+    public getAmount(): string
     {
         let amount: string = '';
 
