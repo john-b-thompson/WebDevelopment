@@ -32,7 +32,7 @@
                         <h5>Ingredients:</h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item" *ngFor="let ingred of modalRecipe.Ingredients">
-                                {{ingred.Amount}} {{ingred.Measurement}} - {{ingred.Name}}
+                                {{ingred.getAmount()}} {{ingred.MeasurementType}} - {{ingred.Name}}
                             </li>
                         </ul>
                       </div>
@@ -52,7 +52,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="onEdit()">Save changes</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onEdit()">Edit Recipe</button>
             </div>
         </div>
     </div>
