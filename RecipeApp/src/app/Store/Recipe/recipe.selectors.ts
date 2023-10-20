@@ -6,5 +6,5 @@ const getRecipeList = createFeatureSelector<State>('recipeList');
 
 export const selectRecipeList = createSelector(
     getRecipeList,
-    (state) => { return state.recipeList; }
+    (state) => { return state; }
 );
