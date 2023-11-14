@@ -1,41 +1,108 @@
-<div class="row justify-content-sm-center">      
-    <div class="col-md-5 mb-0 mb-sm-0" *ngFor="let recipe of recipeList; let i = index" style="margin-top: 15px;">
-        <div class="card" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="onLoad(i)">
-            <div class="card-body">
-            <h5 class="card-title">{{recipe.Name}}</h5>
-            <p class="card-text">{{recipe.Description}}</p>
-            </div>
+<div class="container-fluid g-2 parent">    
+    <div class="row g-2 justify-content-end child">        
+        <div class="col-8 col-md-6 col-lg-3">
+            <form class="d-flex" role="search" [formGroup]="searchForm" (ngSubmit)="onSearch()">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                        formControlName="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>        
+    </div>
+
+    <div class="row g-2 child">
+        <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+            <div class="position-fixed">
+                <h4>Filter</h4>
+                <ul class="list-group " *ngFor="let tag of filterTags;">
+                    <li class="list-group-item border-0">
+                        <input class="form-check-input me-1" type="checkbox" value="{{tag}}" (change)="onFilterChange($event)">
+                        <label class="form-check-label" for="firstCheckbox">{{tag}}</label>
+                    </li>
+                </ul>
+            </div>            
         </div>
+        
+        <div class="col" > 
+            <div class="row">
+                <div class="col-lg-6 mb-3 mb-sm-0 mt-2" *ngFor="let recipe of recipeList; let i = index" >
+                    <div class="card " type="button" data-bs-toggle="modal" data-bs-target="#RecipeModal" (click)="onLoad(i)">
+                        <div class="card-body">
+                            <h5 class="card-title">{{recipe.Name}}</h5>
+                            <p class="card-text">{{recipe.Description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            
+            <!-- TODO: This needs to be fixed at some point! -->
+            <div class="row g-2 mt-2">
+                <nav>
+                    <ul class="pagination justify-content-center g-2">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>   
+
+        </div> 
     </div>
 </div>
 
 <!-- This content is for the recipe modal. -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="RecipeModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel" >{{modalRecipe.Name}}</h1>
+                <h1 class="modal-title fs-5" id="RecipeModal">{{modalRecipe.Name}}</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body">    
                 <div class="container" style="border-bottom: 1px solid; margin-bottom: 15px;">
                     <div class="row justify-content-lg">
-                      <div class="col-lg-6 div-bottom-border" >                        
-                        <h5>Description:</h5>
-                        <p style="padding: 10px;">
-                            {{modalRecipe.Description}}
-                        </p>
-                      </div>
+                        <div class="col-lg">                                                  
+                            <h5>Tags:</h5>
+                            <ul class="list-group list-group-horizontal">
+                                <li class="list-group-item border-0" *ngFor="let tag of modalRecipe.Tags">
+                                    {{tag}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 
-                      <div class="col-lg-3">                        
-                        <h5>Ingredients:</h5>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" *ngFor="let ingred of modalRecipe.Ingredients">
-                                {{ingred.getAmount()}} {{ingred.MeasurementType}} - {{ingred.Name}}
-                            </li>
-                        </ul>
-                      </div>
+                    <div class="row justify-content-lg">
+                        <div class="col-lg-6 div-bottom-border" >                        
+                            <h5>Description:</h5>
+                            <p style="padding: 10px;">
+                                {{modalRecipe.Description}}
+                            </p>
+                        </div>
+
+                        <div class="col-lg-3">                        
+                            <h5>Ingredients:</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item" *ngFor="let ingred of modalRecipe.Ingredients">
+                                    {{ingred.getAmount()}} {{ingred.MeasurementType}} - {{ingred.Name}}
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
