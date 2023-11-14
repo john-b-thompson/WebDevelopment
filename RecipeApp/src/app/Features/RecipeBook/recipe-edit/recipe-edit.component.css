@@ -1,0 +1,16 @@
+textarea {
+    resize: none;
+}
+
+.mt-3 {
+    margin-top: 3px;
+}
+
+
+.mt-2 {
+    margin-top: 3px;
+}
+
+input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+    border: solid 1px red;
+}

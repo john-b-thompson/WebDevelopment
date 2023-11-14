@@ -1,1 +1,116 @@
-<p>recipe-edit works!</p>
+
+<div class="container g-1">
+    <form class="form-group row" [formGroup]="recipeForm" (ngSubmit)="onSubmit()">  
+        <!-- Recipe Name -->
+        <div class="row g-2">
+            <div class="col-lg-4 col-md-5 col-sm-7 col-8">
+                <label for="recipeName" class="form-label fw-bold">Recipe Name:</label>
+                <input type="input" class="form-control" id="recipeName"
+                    formControlName="Name" placeholder="Name this Recipe!">
+            </div>
+        </div>
+
+        <!-- Recipe Tags -->
+        <div class="g-2" formArrayName="Tags">
+            <div class="row" *ngFor="let Tag of getControls('Tags'); let i = index" [formGroupName]="i">
+                <div class="col-4 col-sm-4 col-md-3 col-lg-2 mt-2">
+                    <label for="recipeTags" class="form-label fw-bold">Tag:</label>
+                    <select id="recipeTags" class="form-select" formControlName="Tag">
+                        <option selected>{{ (isEditing && hasValue(selectedRecipe.Tags[i])) 
+                                            ? selectedRecipe.Tags[i] : "Please Select One"}}</option>
+                        <option *ngFor="let tag of tags;">{{tag}}</option>
+                    </select>
+                </div>
+    
+                <div class="g-2 col-md-1 col-lg-1 col-1 align-self-end">             
+                    <button class="btn btn-danger fw-bold" type="button" (click)="onDelete(i, 'Tags')">X</button>
+                </div>
+            </div>
+        </div>        
+                       
+        <div class="g-2">                
+            <button type="button" class="btn btn-primary col-lg-2 col-md-3 col-sm-4 col-4 fw-bold"
+                (click)="onAddExtraStringFormGroup('Tags')">Add Tag</button>
+        </div>
+
+        <!-- Recipe Description -->
+        <div class="row g-2 col-12">            
+            <div class="col-lg-9">
+                <label for="recipeDescription" class="form-label fw-bold">Description:</label>
+                <textarea class="form-control" id="recipeDescription" rows="3" 
+                    placeholder="Describe the recipe!" formControlName="Description"></textarea>
+            </div>
+        </div>
+
+        <!-- Recipe Ingredients -->
+        <div formArrayName="Ingredients" class="row">
+            <div class="row g-2" [formGroupName]="i" *ngFor="let Ingredient of getControls('Ingredients'); let i = index">
+                <div class="col-lg-3 col-md-5 col-sm-8 col-8">
+                    <label for="ingredName" class="form-label fw-bold">Ingredient Name:</label>
+                    <input type="text" class="form-control" id="ingredName" formControlName="Name" placeholder="Enter Ingredient Name">
+                </div>
+    
+                <div class="col-5 col-sm-5 col-md-3 col-lg-2 ">
+                    <label for="ingredAmount" class="form-label fw-bold">Amount:</label>
+                    <input type="number" class="form-control "
+                         id="ingredWholeNumber" placeholder="Whole Number" formControlName="WholeAmount">
+                    <select id="ingredFraction" class="form-select mt-2" formControlName="FractionAmount">
+                        <option selected>{{ (isEditing && hasValue(selectedRecipe.Ingredients[i])) 
+                                            ? selectedRecipe.Ingredients[i].FractionAmount : "Please Select One"}}</option>
+                        <option>0</option>
+                        <option *ngFor="let frac of fractionMeasurement;" >{{frac}}</option>
+                    </select>
+                </div>
+        
+                <div class="col-5 col-sm-5 col-md-3 col-lg-2 ">
+                    <label for="measurementType" class="form-label fw-bold">Measurement Type:</label>
+                    <select id="measurementType" class="form-select" formControlName="MeasurementType">
+                        <option selected>{{ (isEditing && hasValue(selectedRecipe.Ingredients[i])) 
+                                            ?  selectedRecipe.Ingredients[i].MeasurementType : "Please Select One"}}</option>
+                        <option *ngFor="let type of measurementType;">{{type}}</option>
+                    </select>
+                </div> 
+
+                <div class="col-md-1 col-lg-1 col-1 align-self-center">             
+                    <button class="btn btn-danger fw-bold" type="button" (click)="onDelete(i, 'Ingredients')">X</button>
+                </div>
+            </div>
+        </div>
+                       
+        <div class="g-2">                
+            <button type="button" class="btn btn-primary col-lg-2 col-md-3 col-sm-4 col-4 fw-bold"
+                (click)="onAddIngredient()">Add Ingredient</button>
+        </div>
+
+        <!-- Recipe Instructions -->
+        <div formArrayName="Instructions" class="g-2">           
+            <label for="recipeInstructions" class="fw-bold">Instructions:</label>
+
+            <div class="row g-2" *ngFor="let step of getControls('Instructions'); let i = index;" [formGroupName]="i">  
+                <div class="col-lg-8 col-md-11 col-sm-11 col-11 mt-3" >
+                    <textarea class="form-control" id="recipeInstructions" rows="4" 
+                        placeholder="Step {{i + 1}}" formControlName="Step"></textarea>
+                </div>                    
+                
+                <div class="col-lg-1 col-md-1 col-sm-1 col-1 mt-3">
+                    <button type="button" class="btn btn-danger fw-bold" 
+                            (click)="onDelete(i, 'Instructions')" type="button">X</button>
+                </div> 
+            </div>                  
+        </div>          
+
+        <div class="g-2 ">                
+            <button type="button" class="btn btn-primary col-lg-2 col-md-3 col-sm-4 col-4 fw-bold" 
+                (click)="onAddExtraStringFormGroup('Instructions')">Add Instruction</button>
+        </div> 
+
+        <!-- Save/Update Recipe -->
+        <div class="row g-2 ">
+          <button type="submit" class="btn btn-success col-lg-2 col-md-2 col-sm-3 col-4 fw-bold"
+            [disabled]="recipeForm.invalid">{{ isEditing ? "Update" : "Save"}} Recipe</button>
+        </div>
+        
+    </form>
+    <br>
+</div>
+   
