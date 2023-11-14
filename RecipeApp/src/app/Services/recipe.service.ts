@@ -13,7 +13,7 @@ export class RecipeService {
 
   constructor(private recipeListStore: Store<State>) { }
 
-  public GetRecipeList(): Recipe[]
+  public getRecipeList(): Recipe[]
   {
     let recipeList = new Array<Recipe>();
     this.recipeListStore.select(selectRecipeList).subscribe(
@@ -30,7 +30,7 @@ export class RecipeService {
   }
 
   // Will grab a single recipe based on the index passed in.
-  public GetRecipe(index: number): Recipe
+  public getRecipe(index: number): Recipe
   {
     let recipeToReturn: Recipe = {} as Recipe;
     this.recipeListStore.select(selectRecipeList).subscribe(
@@ -46,22 +46,28 @@ export class RecipeService {
   }
 
   // Will save a recipe to the store list.
-  public SaveRecipe(recipe: Recipe)
+  public saveRecipe(recipe: Recipe)
   {    
     this.recipeListStore.dispatch(RecipeListAPI.saveRecipe({recipe: recipe}));
   }
 
-  public SaveRecipeList(recipeList: Recipe[])
+  public saveRecipeList(recipeList: Recipe[])
   {
     this.recipeListStore.dispatch(RecipeListAPI.saveRecipeList({recipeList: recipeList}));
   }
   
-  public DeleteRecipe(recipeList: Recipe[], index: number)
+  public deleteRecipe(recipeList: Recipe[], index: number)
   {
     // Need to grab list remove one from it and
     // then save the list 
     let newRecipeList = recipeList.slice(index, 1);
-    this.SaveRecipeList(newRecipeList);
+    this.saveRecipeList(newRecipeList);
+  }
+
+  // TODO: Fill this out
+  public updateRecipe(recipeId: number, recipe: Recipe)
+  {
+    this.recipeListStore.dispatch(RecipeListAPI.updateRecipe({recipeId, recipe}));
   }
 
 //#region Conversion

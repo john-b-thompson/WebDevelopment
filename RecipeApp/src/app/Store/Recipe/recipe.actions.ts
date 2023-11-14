@@ -6,6 +6,7 @@ export const RecipeListAPI = createActionGroup({
     events: {
         'Save Recipe List': props<{recipeList: Recipe[]}>(),
         'Save Recipe': props<{recipe: Recipe}>(),
+        'Update Recipe': props<{recipeId: number, recipe: Recipe}>(),
         'Get Recipe List': emptyProps(),
         'Set Recipe List': props<{recipeList: Recipe[]}>()
     }
